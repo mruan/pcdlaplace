@@ -1,5 +1,5 @@
 #include "comp_llpmatrix.h"
-#include <mex.h>
+//#include <mex.h>
 #include <map>
 
 struct LessdPoint{ 
@@ -17,7 +17,7 @@ struct LessdPoint{
 
 void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double rho, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
-//	mexPrintf("generate_laplace_matrix_sparse_matlab_dim2\n");
+//	fprintf(stdout, "generate_laplace_matrix_sparse_matlab_dim2\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -31,7 +31,7 @@ void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double
 	double hh = h * h;
 	double nmfactor = M_PI * hh * hh / 4;
 	//cout<<"nmfactor: "<<nmfactor<<endl;
-//	mexPrintf("nmfactor: %f\n", nmfactor);
+//	fprintf(stdout, "nmfactor: %f\n", nmfactor);
 
 	unsigned int np = pcloud.p_count();
 	vector<dPoint> points;
@@ -60,7 +60,7 @@ void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double
 	for(unsigned int i = 0; i < np; i ++){
 		
 		//cout<<"i: "<<i<<"\r";
-//		mexPrintf("i: %d\r", i);
+//		fprintf(stdout, "i: %d\r", i);
 
 		dPoint pt = pcloud.point(i).coord();
 		
@@ -84,7 +84,7 @@ void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexErrMsgTxt("Fail to find the index of the neighboring points\n");
+				fprintf(stderr,"Fail to find the index of the neighboring points\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -115,7 +115,7 @@ void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double
 			assert(vh != NULL);
 			if(vh->get_origin_id() >= 0){
 				//cout<<"warning: containing duplicated points"<<endl;
-				mexErrMsgTxt("Containing duplicated points\n");
+				fprintf(stderr,"Containing duplicated points\n");
 
 			}
 			vh->set_origin_id( neighbor_indices[j] );
@@ -170,13 +170,13 @@ void generate_laplace_matrix_sparse_matlab_dim2(PCloud& pcloud, double h, double
 		//JJfout<<i + 1<<" ";
 		//SSfout<<totalweight<<" ";
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 }
 
 void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double rho, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
 	//cout<<"generate_laplace_matrix_sparse_matlab_dim3"<<endl;
-	mexPrintf("generate_laplace_matrix_sparse_matlab_dim3\n");
+	fprintf(stdout, "generate_laplace_matrix_sparse_matlab_dim3\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -191,7 +191,7 @@ void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double
 	double hh = h * h;
 	double nmfactor = sqrt(M_PI * hh) * M_PI * hh * hh / 4;
 	//cout<<"nmfactor: "<<nmfactor<<endl;
-	mexPrintf("nmfactor: %f\n", nmfactor);
+	fprintf(stdout, "nmfactor: %f\n", nmfactor);
 
 	unsigned int np = pcloud.p_count();
 	vector<dPoint> points;
@@ -213,7 +213,7 @@ void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double
 	for(unsigned int i = 0; i < np; i ++){
 
 		//cout<<"i: "<<i<<endl;
-		mexPrintf("i: %d\r", i);
+		fprintf(stdout, "i: %d\r", i);
 		
 		dPoint pt = pcloud.point(i).coord();
 		
@@ -237,7 +237,7 @@ void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexErrMsgTxt("Fail to find the index of the neighboring points\n");
+				fprintf(stderr,"Fail to find the index of the neighboring points\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -273,7 +273,7 @@ void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double
 			assert(vh != NULL);
 			if(vh->get_origin_id() >= 0){
 				//cout<<"warning: containing duplicated points"<<endl;
-				mexErrMsgTxt("Containing duplicated points\n");
+				fprintf(stderr,"Containing duplicated points\n");
 
 			}
 			vh->set_origin_id( neighbor_indices[j] );
@@ -318,13 +318,13 @@ void generate_laplace_matrix_sparse_matlab_dim3(PCloud& pcloud, double h, double
 		//JJfout<<i + 1<<" ";
 		//SSfout<<totalweight<<" ";
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 }
 
 void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double rho, unsigned int tdim, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
 	//cout<<"generate_laplace_matrix_sparse_matlab_dimk"<<endl;
-	mexPrintf("Generate_laplace_matrix_sparse_matlab_dimk\n");
+	fprintf(stdout, "Generate_laplace_matrix_sparse_matlab_dimk\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -344,7 +344,7 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 	}
 	nmfactor *= (hh / 4);
 	//cout<<"nmfactor: "<<nmfactor<<endl;
-	mexPrintf("nmfactor: %f\n", nmfactor);
+	fprintf(stdout, "nmfactor: %f\n", nmfactor);
 
 	unsigned int np = pcloud.p_count();
 	vector<dPoint> points;
@@ -366,7 +366,7 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 	for(unsigned int i = 0; i < np; i ++){
 
 		//cout<<"i: "<<i<<"\r";
-		mexPrintf("i: %d\r", i);
+		fprintf(stdout, "i: %d\r", i);
 
 		dPoint pt = pcloud.point(i).coord();
 		
@@ -390,7 +390,7 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexPrintf("Fail to find the index of the neighboring points.\n");
+				fprintf(stdout, "Fail to find the index of the neighboring points.\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -434,7 +434,7 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 			map<dVertex_handle, ProjPoint>::iterator iter = handle2vid.find(vh);
 			if(iter != handle2vid.end()){
 				//cout<<"Error: Containing duplicated points"<<endl;
-				mexPrintf("Containing duplicated points\n");
+				fprintf(stdout, "Containing duplicated points\n");
 			}
 			else{
 				//cout<<"dim: "<<tr.associated_point(vh).dimension()<<" "<<org.dimension()<<endl;
@@ -456,7 +456,7 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 				map<dVertex_handle, ProjPoint>::iterator iter = handle2vid.find(vh);
 				if(iter == handle2vid.end()){
 					//cout<<"Error: can not find vertex"<<endl;
-					mexPrintf("Failed to find vertex\n");
+					fprintf(stdout, "Failed to find vertex\n");
 				}
 				else{
 					iter->second = ProjPoint(iter->second.vid, iter->second.area + carea / (tdim + 1), iter->second.sqdist);
@@ -500,14 +500,14 @@ void generate_laplace_matrix_sparse_matlab_dimk(PCloud& pcloud, double h, double
 		//JJfout<<i + 1<<" ";
 		//SSfout<<totalweight<<" ";
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 }
 
 
 void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, unsigned int tdim, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
 	//cout<<"generate_graph_laplace_matrix_sparse_matlab"<<endl;
-	mexPrintf("generate_graph_laplace_matrix_sparse_matlab\n");
+	fprintf(stdout, "generate_graph_laplace_matrix_sparse_matlab\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -525,7 +525,7 @@ void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, doubl
 	}
 	nmfactor *= (hh / 4);
 	//cout<<"nmfactor: "<<nmfactor<<endl;
-	mexPrintf("nmfactor: %f\n", nmfactor);
+	fprintf(stdout, "nmfactor: %f\n", nmfactor);
 
 	unsigned int np = pcloud.p_count();
 	vector<dPoint> points;
@@ -544,7 +544,7 @@ void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, doubl
 
 	for(unsigned int i = 0; i < np; i ++){
 		//cout<<"i: "<<i<<endl;
-		mexPrintf("i: %d\r", i);
+		fprintf(stdout, "i: %d\r", i);
 
 		dPoint pt = pcloud.point(i).coord();
 		//search the points within distance h * rho;
@@ -567,7 +567,7 @@ void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, doubl
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexPrintf("Fail to find the index of the neighboring points\n");
+				fprintf(stdout, "Fail to find the index of the neighboring points\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -607,7 +607,7 @@ void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, doubl
 		//JJfout<<i + 1<<" ";
 		//SSfout<<totalweight<<" ";
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 
 	//--------------------------------------------------
 	// IIfout<<"\n ";
@@ -622,7 +622,7 @@ void generate_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, doubl
 void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, unsigned int tdim, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
 	//cout<<"generate_graph_laplace_matrix_sparse_matlab"<<endl;
-	mexPrintf("generate_arbdist_graph_laplace_matrix_sparse_matlab\n");
+	fprintf(stdout, "generate_arbdist_graph_laplace_matrix_sparse_matlab\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -640,7 +640,7 @@ void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double 
 	}
 	//nmfactor *= (hh / 4);
 	//cout<<"nmfactor: "<<nmfactor<<endl;
-	mexPrintf("nmfactor: %f\n", nmfactor);
+	fprintf(stdout, "nmfactor: %f\n", nmfactor);
 
 	unsigned int np = pcloud.p_count();
 	vector<dPoint> points;
@@ -664,7 +664,7 @@ void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double 
 
 	for(unsigned int i = 0; i < np; i ++){
 		//cout<<"i: "<<i<<endl;
-		mexPrintf("i: %d\r", i);
+		fprintf(stdout, "i: %d\r", i);
 
 		dPoint pt = pcloud.point(i).coord();
 		//search the points within distance h * rho;
@@ -687,7 +687,7 @@ void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double 
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexPrintf("Fail to find the index of the neighboring points\n");
+				fprintf(stdout, "Fail to find the index of the neighboring points\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -730,7 +730,7 @@ void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double 
 		//JJfout<<i + 1<<" ";
 		//SSfout<<totalweight<<" ";
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 	
 	//--------------------------------------------------
 	// for(unsigned int i = 0; i < np; i ++){
@@ -774,7 +774,7 @@ void generate_arbdist_graph_laplace_matrix_sparse_matlab(PCloud& pcloud, double 
 
 void generate_kernel_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, unsigned int tdim, vector<unsigned int>& II, vector<unsigned int>& JJ, vector<double>& SS)
 {
-	mexPrintf("generate_kernel_matrix_sparse_matlab\n");
+	fprintf(stdout, "generate_kernel_matrix_sparse_matlab\n");
 
 	typedef CGAL::Search_traits_d<KCd> Traits;
 	typedef CGAL::Fair<Traits> Fair;
@@ -794,7 +794,7 @@ void generate_kernel_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, 
 	// }
 	// nmfactor *= (hh / 4);
 	// //cout<<"nmfactor: "<<nmfactor<<endl;
-	// mexPrintf("nmfactor: %f\n", nmfactor);
+	// fprintf(stdout, "nmfactor: %f\n", nmfactor);
 	//-------------------------------------------------- 
 
 	unsigned int np = pcloud.p_count();
@@ -817,7 +817,7 @@ void generate_kernel_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, 
 
 	for(unsigned int i = 0; i < np; i ++){
 		//cout<<"i: "<<i<<endl;
-		mexPrintf("i: %d\r", i);
+		fprintf(stdout, "i: %d\r", i);
 
 		dPoint pt = pcloud.point(i).coord();
 		//search the points within distance h * rho;
@@ -840,7 +840,7 @@ void generate_kernel_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, 
 			}
 			else{
 				//cout<<"Warning: Fail to find the index of the neighboring points!!"<<endl;
-				mexPrintf("Fail to find the index of the neighboring points\n");
+				fprintf(stdout, "Fail to find the index of the neighboring points\n");
 			}
    	}
 		assert(neighbor_indices.size() >= 3 && find);
@@ -872,7 +872,7 @@ void generate_kernel_matrix_sparse_matlab(PCloud& pcloud, double h, double rho, 
 			//totalweight -= weight;
 		}
 	}
-	mexPrintf("\n");
+	fprintf(stdout, "\n");
 
 	assert(II.size() == JJ.size() && JJ.size() == SS.size());
 

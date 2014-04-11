@@ -29,13 +29,13 @@ if ( CGAL_FOUND )
   
     #include_directories( ${QT3_INCLUDE_DIR} )
 
-    add_executable  (demo test_pcd.cpp point_cloud.cpp )
+    add_executable  (demo test_pcd.cpp point_cloud.cpp lpmatrix.cpp comp_llpmatrix.cpp)
   
     #add_to_cached_list( CGAL_EXECUTABLE_TARGETS demo )
   
   
     # Link the executable to CGAL and third-party libraries
-    target_link_libraries(demo ${CGAL_LIBRARIES} ${CGAL_3RD_PARTY_LIBRARIES} )
+    target_link_libraries(demo ${CGAL_LIBRARIES} ${CGAL_3RD_PARTY_LIBRARIES} lapack)
   
 else()
   

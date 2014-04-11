@@ -1,4 +1,4 @@
-#include <mex.h>
+//#include <mex.h>
 #include "comp_llpmatrix.h"
 #include "lpmatrix.h"
 
@@ -20,7 +20,7 @@ void generate_pcdlaplace_matrix_sparse_matlab(double *points, unsigned int np, u
 	//--------------------------------------------------
 	double h;
 	double avers = pcloud.average_size(nn);
-	mexPrintf("avers: %f\n", avers);
+	printf("avers: %f\n", avers);
 	if(htype == 0){
 		h = avers * hs;
 	}
@@ -28,7 +28,7 @@ void generate_pcdlaplace_matrix_sparse_matlab(double *points, unsigned int np, u
 		h = hs;
 	}
 
-	mexPrintf("h: %f\n", h);
+	printf("h: %f\n", h);
 
 	if(tdim == 2){
 		generate_laplace_matrix_sparse_matlab_dim2(pcloud, h, rho, IIV, JJV, SSV);
@@ -61,7 +61,7 @@ void generate_graphlaplace_matrix_sparse_matlab(double *points, unsigned int np,
 	//--------------------------------------------------
 	double h;
 	double avers = pcloud.average_size(nn);
-	mexPrintf("avers: %f\n", avers);
+	printf("avers: %f\n", avers);
 	if(htype == 0){
 		h = avers * hs;
 	}
@@ -69,7 +69,7 @@ void generate_graphlaplace_matrix_sparse_matlab(double *points, unsigned int np,
 		h = hs;
 	}
 
-	mexPrintf("h: %f\n", h);
+	printf("h: %f\n", h);
 	generate_graph_laplace_matrix_sparse_matlab(pcloud, h, rho, tdim, IIV, JJV, SSV);
 }
 
@@ -89,7 +89,7 @@ void generate_kernelmatrix_sparse_matlab(double *points, unsigned int np, unsign
 	//pcloud.OutPCloud("pcd");
 	//--------------------------------------------------
 	double avers = pcloud.average_size(nn);
-	mexPrintf("avers: %f\n", avers);
+	printf("avers: %f\n", avers);
 	if(htype == 0){
 		h = avers * hs;
 	}
@@ -97,7 +97,7 @@ void generate_kernelmatrix_sparse_matlab(double *points, unsigned int np, unsign
 		h = hs;
 	}
 
-	mexPrintf("h: %f\n", h);
+	printf("h: %f\n", h);
 	generate_kernel_matrix_sparse_matlab(pcloud, h, rho, tdim, IIV, JJV, SSV);
 }
 
@@ -118,7 +118,7 @@ void generate_arbdistgraphlaplace_matrix_sparse_matlab(double *points, unsigned 
 	//--------------------------------------------------
 	double h;
 	double avers = pcloud.average_size(nn);
-	mexPrintf("avers: %f\n", avers);
+	printf("avers: %f\n", avers);
 	if(htype == 0){
 		h = avers * hs;
 	}
@@ -126,7 +126,7 @@ void generate_arbdistgraphlaplace_matrix_sparse_matlab(double *points, unsigned 
 		h = hs;
 	}
 
-	mexPrintf("h: %f\n", h);
+	printf("h: %f\n", h);
 	generate_arbdist_graph_laplace_matrix_sparse_matlab(pcloud, h, rho, tdim, IIV, JJV, SSV);
 }
 
